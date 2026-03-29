@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	pglite "github.com/elliots/go-pglite"
+	pglite "github.com/bobTheBuilder7/go-pglite"
 )
 
 func main() {

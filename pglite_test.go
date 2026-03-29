@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	pglite "github.com/elliots/go-pglite"
+	pglite "github.com/bobTheBuilder7/go-pglite"
 )
 
 func newTestPG(t *testing.T) *pglite.PGlite {

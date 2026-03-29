@@ -24,21 +24,21 @@ import (
 	"time"
 
 	"github.com/bytecodealliance/wasmtime-go/v42"
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 // PGlite is an embedded PostgreSQL instance running in a WASI sandbox.
 type PGlite struct {
-	wasmMu  sync.Mutex // protects WASM function calls
-	initMu  sync.Mutex // protects lazy initialization of db
-	cfg     Config
-	ctx     context.Context
-	cancel  context.CancelFunc
-	engine  *wasmtime.Engine
-	store   *wasmtime.Store
+	wasmMu   sync.Mutex // protects WASM function calls
+	initMu   sync.Mutex // protects lazy initialization of db
+	cfg      Config
+	ctx      context.Context
+	cancel   context.CancelFunc
+	engine   *wasmtime.Engine
+	store    *wasmtime.Store
 	instance *wasmtime.Instance
-	dataDir string
-	tempDir bool
+	dataDir  string
+	tempDir  bool
 
 	// Socket bridge.
 	socketDir  string
@@ -276,7 +276,7 @@ func (pg *PGlite) DB() *sql.DB {
 	pg.initMu.Lock()
 	defer pg.initMu.Unlock()
 	if pg.db == nil {
-		db, err := sql.Open("postgres", pg.connString())
+		db, err := sql.Open("pgx", pg.connString())
 		if err == nil {
 			db.SetMaxOpenConns(1)
 			db.SetMaxIdleConns(1)

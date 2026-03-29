@@ -3,7 +3,7 @@ package pglite_test
 import (
 	"testing"
 
-	pglite "github.com/elliots/go-pglite"
+	pglite "github.com/bobTheBuilder7/go-pglite"
 )
 
 func TestErrorRecovery(t *testing.T) {
